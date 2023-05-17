@@ -1,107 +1,82 @@
 package ru.netology;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.netology.domain.Movie;
 import ru.netology.manager.MovieManager;
 
-import static org.junit.jupiter.api.Assertions.*;
+class MoviePosterManagerTest {
 
-class MovieManagerTest {
-    MovieManager movie = new MovieManager();
+    MovieManager manager = new MovieManager();
+    MovieManager manager2 = new MovieManager(3);
 
-    Movie movie1 = new Movie(1, "Бладшот", "боевик");
-    Movie movie2 = new Movie(2, "Вперёд", "мультфильм");
-    Movie movie3 = new Movie(3, "Отель 'Белград'", "комедия");
-    Movie movie4 = new Movie(4, "Джентельмены", "боевик");
-    Movie movie5 = new Movie(5, "Человек-невидимка", "ужасы");
-    Movie movie6 = new Movie(6, "Тролли. Мировой тур", "мультфильм");
-    Movie movie7 = new Movie(7, "Номер один", "комедия");
+    MovieManager movie1 = new MovieManager (1, "Бладшот", "боевик");
+    MovieManager movie2 = new MovieManager (2, "Вперёд", "мультфильм");
+    MovieManager movie3 = new MovieManager (3, "Отель \"Белград\"", "комедия");
+    MovieManager movie4 = new MovieManager (4, "Джентельмены", "боевик");
+    MovieManager movie5 = new MovieManager (5, "Человек-невидимка", "ужасы");
+    MovieManager movie6 = new MovieManager (6, "Тролли. Мировой тур", "мультфильм");
+    MovieManager movie7 = new MovieManager(7, "Номер один", "комедия");
 
+    @BeforeEach
+    public void setup() {
+        manager.addNewMovie(movie1);
+        manager.addNewMovie(movie2);
+        manager.addNewMovie(movie3);
+        manager.addNewMovie(movie4);
+        manager.addNewMovie(movie5);
+        manager.addNewMovie(movie6);
+        manager.addNewMovie(movie7);
+    }
 
-    @Test
-    public void shouldAddMovie() {
-        movie.add(movie1);
-        movie.add(movie2);
-
-        Movie[] expected = {movie1, movie2};
-        Movie[] actual = movie.findAll();
-
-        assertArrayEquals(expected, actual);
+    @BeforeEach
+    public void setup2() {
+        manager2.addNewMovie(movie1);
+        manager2.addNewMovie(movie2);
+        manager2.addNewMovie(movie3);
+        manager2.addNewMovie(movie4);
+        manager2.addNewMovie(movie5);
+        manager2.addNewMovie(movie6);
+        manager2.addNewMovie(movie7);
     }
 
     @Test
-    public void shouldNullMovie() {
-        Movie[] expected = {};
-        Movie[] actual = movie.findAll();
+    public void testLimitManager() {
 
-        assertArrayEquals(expected, actual);
+        Assertions.assertEquals(5, manager.getLimitManager());
     }
 
     @Test
-    public void shouldFindAllLimit() {
-        movie.add(movie1);
-        movie.add(movie2);
-        movie.add(movie3);
-        movie.add(movie4);
-        movie.add(movie5);
-        movie.add(movie6);
-        movie.add(movie7);
+    public void testLimitManagerIf3() {
 
-
-        Movie[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7};
-        Movie[] actual = movie.findAll();
-
-        assertArrayEquals(expected, actual);
+        Assertions.assertEquals(3, manager2.getLimitManager());
     }
 
     @Test
-    public void shouldFindAllOverLimit() {
-        movie.add(movie1);
-        movie.add(movie2);
-        movie.add(movie3);
-        movie.add(movie4);
-        movie.add(movie5);
-        movie.add(movie6);
-        movie.add(movie7);
+    public void addNewMovie() {
 
+        MovieManager [] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7};
+        MovieManager [] actual = manager.findAll();
 
-        Movie[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7};
-        Movie[] actual = movie.findAll();
-
-        assertArrayEquals(expected, actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldFindAllLimit5() {
+    public void findLast() {
 
-        movie.add(movie1);
-        movie.add(movie2);
-        movie.add(movie3);
-        movie.add(movie4);
-        movie.add(movie5);
+        MovieManager[] expected = {movie7, movie6, movie5, movie4, movie3};
+        MovieManager[] actual = manager.findLast();
 
-
-        Movie[] expected = {movie1, movie2, movie3, movie4, movie5};
-        Movie[] actual = movie.findAll();
-
-        assertArrayEquals(expected, actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
-    public void shouldLastSevenMovie() {
-        movie.add(movie1);
-        movie.add(movie2);
-        movie.add(movie3);
-        movie.add(movie4);
-        movie.add(movie5);
-        movie.add(movie6);
-        movie.add(movie7);
+    public void findLastIf3() {
 
-        Movie[] expected = {movie7, movie6, movie5, movie4, movie3, movie2, movie1};
-        Movie[] actual = movie.findLastSeven();
+        MovieManager [] expected = {movie7, movie6, movie5};
+        MovieManager [] actual = manager2.findLast();
 
-        assertArrayEquals(expected, actual);
+        Assertions.assertArrayEquals(expected, actual);
     }
-
-
 }
+

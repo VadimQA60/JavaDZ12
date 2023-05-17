@@ -3,45 +3,50 @@ package ru.netology.manager;
 import ru.netology.domain.Movie;
 
 public class MovieManager {
-
-    private int countMovie = 7;
-    private Movie[] movies = new Movie[0];
-
-    public MovieManager(int countMovie) {
-        this.countMovie = countMovie;
-    }
+    private int limitManager = 5;
 
     public MovieManager() {
-
     }
 
-    public void add(Movie movie) {
-        int lenght = movies.length + 1;
-        Movie[] tmp = new Movie[lenght];
-        System.arraycopy(movies, 0, tmp, 0, movies.length);
-        int lastIndex = tmp.length - 1;
-        tmp[lastIndex] = movie;
+    public MovieManager(int limitManager) {
+        this.limitManager = limitManager;
+    }
+
+    public MovieManager(int i, String бладшот, String боевик) {
+    }
+
+    public int getLimitManager() {
+        return limitManager;
+    }
+
+
+    public MovieManager[] movies = new MovieManager[0];
+
+    public void addNewMovie(MovieManager movie) {
+        MovieManager[] tmp = new MovieManager[movies.length + 1];
+        for (int i = 0; i < movies.length; i++) {
+            tmp[i] = movies[i];
+        }
+        tmp[tmp.length - 1] = movie;
         movies = tmp;
     }
 
-    public Movie[] findLastSeven() {
-
-        int resultLength = movies.length;
-        if (resultLength >= countMovie) {
-            resultLength = countMovie;
-        } else {
-            resultLength = movies.length;
-        }
-        Movie[] result = new Movie[resultLength];
-        for (int i = 0; i < result.length; i++) {
-            int index = movies.length - i - 1;
-            result[i] = movies[index];
-        }
-        return result;
+    public MovieManager[] findAll() {
+        return movies;
     }
 
-    public Movie[] findAll() {
-        return movies;
 
+    public MovieManager[] findLast() {
+        int resultLenght;
+        if (limitManager == movies.length) {
+            resultLenght = movies.length;
+        } else {
+            resultLenght = limitManager;
+        }
+        MovieManager[] result = new MovieManager[resultLenght];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = movies[movies.length - 1 - i];
+        }
+        return result;
     }
 }
