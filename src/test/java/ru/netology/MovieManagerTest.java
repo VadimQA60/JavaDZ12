@@ -10,12 +10,12 @@ class MoviePosterManagerTest {
     MovieManager manager = new MovieManager();
     MovieManager manager2 = new MovieManager(3);
 
-    MovieManager movie1 = new MovieManager (1, "Бладшот", "боевик");
-    MovieManager movie2 = new MovieManager (2, "Вперёд", "мультфильм");
-    MovieManager movie3 = new MovieManager (3, "Отель \"Белград\"", "комедия");
-    MovieManager movie4 = new MovieManager (4, "Джентельмены", "боевик");
-    MovieManager movie5 = new MovieManager (5, "Человек-невидимка", "ужасы");
-    MovieManager movie6 = new MovieManager (6, "Тролли. Мировой тур", "мультфильм");
+    MovieManager movie1 = new MovieManager(1, "Бладшот", "боевик");
+    MovieManager movie2 = new MovieManager(2, "Вперёд", "мультфильм");
+    MovieManager movie3 = new MovieManager(3, "Отель \"Белград\"", "комедия");
+    MovieManager movie4 = new MovieManager(4, "Джентельмены", "боевик");
+    MovieManager movie5 = new MovieManager(5, "Человек-невидимка", "ужасы");
+    MovieManager movie6 = new MovieManager(6, "Тролли. Мировой тур", "мультфильм");
     MovieManager movie7 = new MovieManager(7, "Номер один", "комедия");
 
     @BeforeEach
@@ -55,8 +55,8 @@ class MoviePosterManagerTest {
     @Test
     public void addNewMovie() {
 
-        MovieManager [] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7};
-        MovieManager [] actual = manager.findAll();
+        MovieManager[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7};
+        MovieManager[] actual = manager.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -73,8 +73,8 @@ class MoviePosterManagerTest {
     @Test
     public void findLastIf3() {
 
-        MovieManager [] expected = {movie7, movie6, movie5};
-        MovieManager [] actual = manager2.findLast();
+        MovieManager[] expected = {movie7, movie6, movie5};
+        MovieManager[] actual = manager2.findLast();
 
         Assertions.assertArrayEquals(expected, actual);
     }

@@ -5,6 +5,8 @@ import ru.netology.domain.Movie;
 public class MovieManager {
     private int limitManager = 5;
 
+    private MovieManager[] movies = new MovieManager[0];
+
     public MovieManager() {
     }
 
@@ -19,8 +21,6 @@ public class MovieManager {
         return limitManager;
     }
 
-
-    public MovieManager[] movies = new MovieManager[0];
 
     public void addNewMovie(MovieManager movie) {
         MovieManager[] tmp = new MovieManager[movies.length + 1];
