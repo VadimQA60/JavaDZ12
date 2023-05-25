@@ -31,16 +31,6 @@ class MovieManagerTest {
         manager.addNewMovie(movie7);
     }
 
-    @BeforeEach
-    public void setup2() {
-        manager2.addNewMovie(movie1);
-        manager2.addNewMovie(movie2);
-        manager2.addNewMovie(movie3);
-        manager2.addNewMovie(movie4);
-        manager2.addNewMovie(movie5);
-        manager2.addNewMovie(movie6);
-        manager2.addNewMovie(movie7);
-    }
 
     @Test
     public void testLimitManager() {
@@ -50,6 +40,10 @@ class MovieManagerTest {
 
     @Test
     public void testLimitManagerIf3() {
+
+        manager2.addNewMovie(movie1);
+        manager2.addNewMovie(movie2);
+        manager2.addNewMovie(movie3);
 
         Assertions.assertEquals(3, manager2.getLimitManager());
     }
@@ -73,12 +67,28 @@ class MovieManagerTest {
     }
 
     @Test
-    public void findLastIf3() {
+    public void findLastIfMoviesLessManager() {
+        manager2.addNewMovie(movie1);
+        manager2.addNewMovie(movie2);
 
-        Movie[] expected = {movie7, movie6, movie5};
+        Movie[] expected = {movie2, movie1};
         Movie[] actual = manager2.findLast();
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void findLastIfMoviesEqualsManager() {
+        manager2.addNewMovie(movie1);
+        manager2.addNewMovie(movie2);
+        manager2.addNewMovie(movie3);
+
+        Movie[] expected = {movie3, movie2, movie1};
+        Movie[] actual = manager2.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+
 }
 

@@ -35,7 +35,7 @@ public class MovieManager {
 
     public Movie[] findLast() {
         int resultLenght;
-        if (limitManager == movies.length) {
+        if (limitManager > movies.length) {
             resultLenght = movies.length;
         } else {
             resultLenght = limitManager;
